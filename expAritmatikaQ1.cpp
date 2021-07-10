@@ -1,51 +1,47 @@
 #include <iostream>
+#include <vector>  
 #include <string>
-#include <vector>
-
 using namespace std;
 
-bool IsOperator(char c){
-    if(c == '+'){
-        return true;
-    }
-    else if(c =='-'){
-        return true;
-    }
-    else if(c =='/'){
-        return true;
-    }
-    else if(c =='*'){
-        return true;
-    }
-    else{
-        return false;
-    }
 
-}
-
-
-int main(){
-    string input,postFix;
-     
-   
+int main() {
+    string input; 
     getline(cin,input);
 
-    for(int i=0;i<input.length();i++){
-        if(isdigit(input[i])){
-            postFix = postFix + input[i];
-
-            if(!(isdigit(input[i+1]))){
-                postFix = postFix + " ";
-            }
-
-        }else if(!(isdigit(input[i])) && input[i]!=  ' '){
-            postFix =postFix+ input[i];
-            postFix = postFix+ " ";
+    vector<char> postFix;
+    for( int unsigned i=0; i<input.length(); i++){
+        if(input[i] == ' ')
+        {
+            continue;
         }
+            
+        else if(isdigit(input[i]))
+        { 
+            postFix.push_back(input[i]);
+            
+        }
+        
+        else if(input[i] == '-'){
 
+            postFix.push_back(input[i]);
+           
+            postFix.push_back('1');
+            postFix.push_back(' ');
+            postFix.push_back('*'); 
+
+        } 
+        else {
+            postFix.push_back(' ');
+            postFix.push_back(input[i]);
+            postFix.push_back(' ');
+        }
+        
     }
+    cout <<"Print : ";
 
-    
-    cout << "Print : " << postFix;
+    for(auto v:postFix)
+
+        cout << v;
+
     return 0;
 }
